@@ -1,63 +1,79 @@
 import { IsEnum, IsString, IsArray, IsOptional, IsBoolean } from 'class-validator';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { TemplateCategory } from '@prisma/client';
 
 export { TemplateCategory };
 
 export class CreateTemplateDto {
-    @IsString()
-    name: string;
+  @ApiProperty()
+  @IsString()
+  name: string;
 
-    @IsEnum(TemplateCategory)
-    category: TemplateCategory;
+  @ApiProperty({ enum: TemplateCategory })
+  @IsEnum(TemplateCategory)
+  category: TemplateCategory;
 
-    @IsString()
-    description: string;
+  @ApiProperty()
+  @IsString()
+  description: string;
 
-    @IsOptional()
-    @IsString()
-    thumbnail?: string;
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  thumbnail?: string;
 
-    @IsArray()
-    @IsString({ each: true })
-    requiredFields: string[];
+  @ApiProperty({ type: [String] })
+  @IsArray()
+  @IsString({ each: true })
+  requiredFields: string[];
 
-    @IsString()
-    htmlContent: string;
+  @ApiProperty()
+  @IsString()
+  htmlContent: string;
 }
 
 export class UpdateTemplateDto {
-    @IsOptional()
-    @IsString()
-    name?: string;
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  name?: string;
 
-    @IsOptional()
-    @IsEnum(TemplateCategory)
-    category?: TemplateCategory;
+  @ApiPropertyOptional({ enum: TemplateCategory })
+  @IsOptional()
+  @IsEnum(TemplateCategory)
+  category?: TemplateCategory;
 
-    @IsOptional()
-    @IsString()
-    description?: string;
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  description?: string;
 
-    @IsOptional()
-    @IsArray()
-    @IsString({ each: true })
-    requiredFields?: string[];
+  @ApiPropertyOptional({ type: [String] })
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  requiredFields?: string[];
 
-    @IsOptional()
-    @IsString()
-    htmlContent?: string;
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsString()
+  htmlContent?: string;
 
-    @IsOptional()
-    @IsBoolean()
-    isActive?: boolean;
+  @ApiPropertyOptional()
+  @IsOptional()
+  @IsBoolean()
+  isActive?: boolean;
 }
 
 export class GenerateDto {
-    @IsString()
-    templateId: string;
+  @ApiProperty()
+  @IsString()
+  templateId: string;
 
-    @IsEnum(['pdf', 'image'])
-    format: 'pdf' | 'image';
+  @ApiProperty({ enum: ['pdf', 'image'] })
+  @IsEnum(['pdf', 'image'])
+  format: 'pdf' | 'image';
 
-    data: Record<string, any>;
+  @ApiProperty({ type: Object })
+  data: Record<string, any>;
 }
