@@ -17,13 +17,16 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "prisma:watch": "nodemon --watch prisma/schema.prisma --exec \"npm run prisma:generate-and-migrate\"",
+    "prisma:generate-and-migrate": "npx prisma generate && npx prisma migrate dev"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
     "@prisma/client": "^6.19.2",
+    "class-validator": "^0.14.3",
     "reflect-metadata": "^0.2.2",
     "rxjs": "^7.8.1"
   },
@@ -42,6 +45,7 @@
     "eslint-plugin-prettier": "^5.2.2",
     "globals": "^16.0.0",
     "jest": "^30.0.0",
+    "nodemon": "^3.1.11",
     "prettier": "^3.4.2",
     "prisma": "^6.19.2",
     "source-map-support": "^0.5.21",
