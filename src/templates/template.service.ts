@@ -72,7 +72,6 @@ export class TemplatesService {
         });
     }
 
-    // Search templates
     async search(query: string): Promise<Template[]> {
         const searchQuery = query.toLowerCase().trim();
         
