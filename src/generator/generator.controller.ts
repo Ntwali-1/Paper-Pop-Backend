@@ -18,6 +18,7 @@ export class GeneratorController {
       if (generateDto.format === 'pdf') {
         buffer = await this.generatorService.generatePDF(
           generateDto.templateId,
+          generateDto.requiredFields,
           generateDto.data,
         );
         contentType = 'application/pdf';
@@ -25,6 +26,7 @@ export class GeneratorController {
       } else if (generateDto.format === 'image') {
         buffer = await this.generatorService.generateImage(
           generateDto.templateId,
+          generateDto.requiredFields,
           generateDto.data,
         );
         contentType = 'image/png';
@@ -60,6 +62,7 @@ export class GeneratorController {
     try {
       const buffer = await this.generatorService.generateImage(
         generateDto.templateId,
+        generateDto.requiredFields,
         generateDto.data,
       );
 

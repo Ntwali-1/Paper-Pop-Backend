@@ -17,16 +17,6 @@ export class CreateTemplateDto {
   @IsString()
   description: string;
 
-  @ApiPropertyOptional()
-  @IsOptional()
-  @IsString()
-  thumbnail?: string;
-
-  @ApiProperty({ type: [String] })
-  @IsArray()
-  @IsString({ each: true })
-  requiredFields: string[];
-
   @ApiProperty()
   @IsString()
   htmlContent: string;
@@ -48,12 +38,6 @@ export class UpdateTemplateDto {
   @IsString()
   description?: string;
 
-  @ApiPropertyOptional({ type: [String] })
-  @IsOptional()
-  @IsArray()
-  @IsString({ each: true })
-  requiredFields?: string[];
-
   @ApiPropertyOptional()
   @IsOptional()
   @IsString()
@@ -73,6 +57,11 @@ export class GenerateDto {
   @ApiProperty({ enum: ['pdf', 'image'] })
   @IsEnum(['pdf', 'image'])
   format: 'pdf' | 'image';
+
+  @ApiProperty({ type: [String] })
+  @IsArray()
+  @IsString({ each: true })
+  requiredFields: string[];
 
   @ApiProperty({ type: Object })
   data: Record<string, any>;

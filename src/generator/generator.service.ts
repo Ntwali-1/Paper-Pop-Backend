@@ -15,12 +15,12 @@ export class GeneratorService {
     return result;
   }
 
-  async generatePDF(templateId: string, data: Record<string, any>): Promise<Buffer> {
+  async generatePDF(templateId: string, requiredFields: string[], data: Record<string, any>): Promise<Buffer> {
     // Get template from database
     const template = await this.templatesService.findOne(templateId);
 
     // Check required fields
-    const missingFields = template.requiredFields.filter(field => !data[field]);
+    const missingFields = requiredFields.filter(field => !data[field]);
     if (missingFields.length > 0) {
       throw new BadRequestException(`Missing required fields: ${missingFields.join(', ')}`);
     }
@@ -48,10 +48,10 @@ export class GeneratorService {
     return Buffer.from(pdfBuffer);
   }
 
-  async generateImage(templateId: string, data: Record<string, any>): Promise<Buffer> {
+  async generateImage(templateId: string, requiredFields: string[], data: Record<string, any>): Promise<Buffer> {
     const template = await this.templatesService.findOne(templateId);
 
-    const missingFields = template.requiredFields.filter(field => !data[field]);
+    const missingFields = requiredFields.filter(field => !data[field]);
     if (missingFields.length > 0) {
       throw new BadRequestException(`Missing required fields: ${missingFields.join(', ')}`);
     }

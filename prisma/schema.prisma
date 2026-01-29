@@ -18,7 +18,6 @@ model Template {
   name           String
   category       TemplateCategory
   description    String           @db.Text
-  requiredFields String[]         // Array of strings
   htmlContent    String           @db.Text
   isActive       Boolean          @default(true)
   createdAt      DateTime         @default(now())
