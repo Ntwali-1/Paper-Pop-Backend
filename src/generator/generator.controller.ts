@@ -38,14 +38,12 @@ export class GeneratorController {
         });
       }
 
-      // Set response headers
       res.set({
         'Content-Type': contentType,
         'Content-Disposition': `attachment; filename="${filename}"`,
         'Content-Length': buffer.length,
       });
 
-      // Send the file
       return res.status(HttpStatus.OK).send(buffer);
     } catch (error) {
       return res.status(error.status || HttpStatus.BAD_REQUEST).json({

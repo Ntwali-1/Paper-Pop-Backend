@@ -16,19 +16,15 @@ export class GeneratorService {
   }
 
   async generatePDF(templateId: string, requiredFields: string[], data: Record<string, any>): Promise<Buffer> {
-    // Get template from database
     const template = await this.templatesService.findOne(templateId);
 
-    // Check required fields
     const missingFields = requiredFields.filter(field => !data[field]);
     if (missingFields.length > 0) {
       throw new BadRequestException(`Missing required fields: ${missingFields.join(', ')}`);
     }
 
-    // Replace variables in HTML
     const htmlContent = this.replaceTemplateVariables(template.htmlContent, data);
 
-    // Generate PDF using Puppeteer
     const browser = await puppeteer.launch({
       headless: true,
       args: ['--no-sandbox', '--disable-setuid-sandbox'],
