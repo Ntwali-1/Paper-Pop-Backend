@@ -70,14 +70,14 @@ export class TemplatesController {
         return await this.templatesService.findOne(id);
     }
 
-    /*@Put(':id')
+    @Put(':id')
     @UsePipes(new ValidationPipe({ transform: true }))
     async update(
         @Param('id') id: string,
         @Body() updateTemplateDto: UpdateTemplateDto,
     ) {
         return await this.templatesService.update(id, updateTemplateDto);
-    }*/
+    }
 
     @Delete(':id')
     async remove(@Param('id') id: string) {

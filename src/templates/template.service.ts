@@ -48,14 +48,14 @@ export class TemplatesService {
         return template;
     }
 
-    /*async update(id: string, updateTemplateDto: UpdateTemplateDto): Promise<Template> {
+    async update(id: string, updateTemplateDto: UpdateTemplateDto): Promise<Template> {
         await this.findOne(id);
 
         return await this.prisma.template.update({
             where: { id },
             data: updateTemplateDto,
         });
-    }*/
+    }
 
     async remove(id: string): Promise<void> {
         await this.findOne(id);
