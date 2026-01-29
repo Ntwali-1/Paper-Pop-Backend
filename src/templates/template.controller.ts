@@ -18,11 +18,11 @@ import { CreateTemplateDto, UpdateTemplateDto, TemplateCategory } from './dto/te
 @Controller('api/templates')
 export class TemplatesController {
     constructor(private readonly templatesService: TemplatesService) { }
-    /*@Post()
+    @Post()
     @UsePipes(new ValidationPipe({ transform: true }))
     async create(@Body() createTemplateDto: CreateTemplateDto) {
         return await this.templatesService.create(createTemplateDto);
-    }*/
+    }
 
     @Get()
     async findAll(@Query('category') category?: TemplateCategory) {

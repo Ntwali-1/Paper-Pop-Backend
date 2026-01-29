@@ -7,11 +7,11 @@ import { Template } from '@prisma/client';
 export class TemplatesService {
     constructor(private readonly prisma: PrismaService) { }
 
-    /*async create(createTemplateDto: CreateTemplateDto): Promise<Template> {
+    async create(createTemplateDto: CreateTemplateDto): Promise<Template> {
         return await this.prisma.template.create({
             data: createTemplateDto,
         });
-    }*/
+    }
 
     async findAll(): Promise<Template[]> {
         return await this.prisma.template.findMany({
