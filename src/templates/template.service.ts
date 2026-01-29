@@ -74,24 +74,36 @@ export class TemplatesService {
 
     // Search templates
     async search(query: string): Promise<Template[]> {
+        const searchQuery = query.toLowerCase().trim();
+        
+        const matchingCategories = Object.values(TemplateCategory).filter(category => 
+            category.toLowerCase().includes(searchQuery)
+        );
+
+        const searchConditions: any[] = [
+            { name: { contains: query, mode: 'insensitive' as const } },
+            { description: { contains: query, mode: 'insensitive' as const } },
+        ];
+
+        if (matchingCategories.length > 0) {
+            searchConditions.push(
+                ...matchingCategories.map(category => ({ category }))
+            );
+        }
+
         return await this.prisma.template.findMany({
             where: {
                 isActive: true,
-                OR: [
-                    { name: { contains: query, mode: 'insensitive' } },
-                    { description: { contains: query, mode: 'insensitive' } },
-                ],
+                OR: searchConditions,
             },
             orderBy: { createdAt: 'desc' },
         });
     }
 
-    // Get categories
     getCategories(): TemplateCategory[] {
         return Object.values(TemplateCategory);
     }
 
-    // Get statistics
     async getStats() {
         const total = await this.prisma.template.count({
             where: { isActive: true },
