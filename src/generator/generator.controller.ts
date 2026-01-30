@@ -8,7 +8,7 @@ export class GeneratorController {
   constructor(private readonly generatorService: GeneratorService) {} 
 
 
-  //Generate a pdf
+  //Generate a pdf or image
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async generate(@Body() generateDto: GenerateDto, @Res() res: Response) {
