@@ -8,7 +8,7 @@ export class GeneratorController {
   constructor(private readonly generatorService: GeneratorService) {} 
 
 
-  //Generate
+  //Generate a 
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async generate(@Body() generateDto: GenerateDto, @Res() res: Response) {
