@@ -5,8 +5,10 @@ import { GenerateDto } from '../templates/dto/template.dto';
 
 @Controller('api/generate')
 export class GeneratorController {
-  constructor(private readonly generatorService: GeneratorService) {}
+  constructor(private readonly generatorService: GeneratorService) {} 
 
+
+  //Ge
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async generate(@Body() generateDto: GenerateDto, @Res() res: Response) {
